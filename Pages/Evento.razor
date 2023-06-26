@@ -1,0 +1,78 @@
+@page "/evento"
+@inject HttpClient httpClient
+@using System.Net.Http.Json
+@inject NavigationManager NavigationManager
+
+
+ 
+
+<h3>Lista de Eventos</h3>
+
+ 
+
+@if (eventos == null)
+{
+<p>Cargando eventos...</p>
+}
+else if (eventos.Count == 0)
+{
+<p>No hay eventos disponibles.</p>
+}
+else
+{
+<table class="table">
+<thead class="table">
+<tr>
+<th>Id</th>
+<th>Nombre</th>
+<th>Cantidad de boletos</th>
+<th>Tipo Evento</th>
+</tr>
+</thead>
+<tbody>
+            @foreach (var evento in eventos)
+            {
+<tr>
+<td>@evento.eventoId</td>
+<td>@evento.nombreEvento</td>
+<td>@evento.cantidadBoletos</td>
+<td>@evento.tipoEvento</td>
+</tr>@*
+     <div class="d-flex justify-content-start">
+        <div>
+    <button type="button" class="btn btn-outline-info" @onclick="() => VerBoletosReservados(evento.eventoId)">Ver</button>
+    </div>
+    <div>
+     <button type="button" class="btn btn-outline-info" @onclick="() => AgregarBoletos(evento.eventoId)">Agregar</button>
+     </div>
+     </div> *@              
+    }      
+        </tbody>
+    </table>
+
+}
+
+@code {
+    List<EventoDto> eventos;
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventos = await httpClient.GetFromJsonAsync<List<EventoDto>>("/list/evento");
+    }
+
+    private void VerBoletosReservados(int eventoId)
+    {
+        // Navegar a la página de visualización de boletos reservados para el evento con el ID proporcionado
+        NavigationManager.NavigateTo($"/eventos/{eventoId}/boletosreservados");
+    }
+
+    private void AgregarBoletos(int eventoId)
+    {
+        // Navegar a la página de agregar boletos para el evento con el ID proporcionado
+        NavigationManager.NavigateTo($"/eventos/{eventoId}/agregarboletos");
+    }
+   
+
+   
+}

@@ -1,0 +1,60 @@
+@page "/Boleto"
+@inject HttpClient Http
+
+
+<h2>Boletos</h2>
+
+@if (boletos == null)
+{
+<p>Cargando eventos...</p>
+}
+else if (boletos.Count == 0)
+{
+<p>No hay eventos disponibles.</p>
+}
+else
+{
+<table class="table">
+
+    <thead>
+            <tr>
+                <th>BoletoId</th>
+                <th> EventoId</th>
+                <th>Precio</th>
+                <th>Fecha</th>
+            </tr>
+    </thead>
+  <tbody>
+
+@foreach (var boleto in boletos)
+{
+    <tr>
+        <td>@boleto.BoletoId</td>
+        <td>@boleto.EventoId</td>
+        <td>@boleto.Precio</td>
+        <td>@boleto.Fecha</td>
+        <td>
+           
+            {
+                <button @onclick = "GetBoleto">Seleccionar Boletos</button>
+            }
+         
+        </td>
+       
+    </tr>
+}
+  </tbody>
+</table>
+
+}
+  
+
+@code{
+    private List<BoletoDto> boletos;
+
+     private async Task GetBoleto(){
+        var boleto = await Http.GetFromJsonAsync<List<BoletoDto>>("/list/boletos");
+            Console.WriteLine("way" +boleto);
+    }
+    
+}

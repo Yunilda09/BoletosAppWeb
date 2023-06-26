@@ -1,0 +1,156 @@
+@*page "/Boleto"
+
+
+<div class="card border-info mb-3" style="max-width: 100rem;">
+ <div class="card text-dark bg-light mb-3 shadow-lg">
+  
+    <h2 class="card-hearder"> Eventos</h2>
+
+<div class="card-body">
+
+    <div class="row justify-content-between">
+    
+    <div class="row justify-content-between">
+       
+  <div class="col-sm">
+    <label>Nombre del Evento</label>
+    <input type="text" class="form-control" placeholder="Nombre Evento" aria-label="Nombre Evento">
+  </div>
+  <div class="col-sm">
+    <label>Lugar del Evento</label>
+    <input type="text" class="form-control" placeholder="Lugar del Evento" aria-label="State">
+  </div>
+  <div class="col-sm">
+    <label>Tipo de Evento</label>
+    <input type="text" class="form-control" placeholder="Tipo de Evento" aria-label="Zip">
+  </div>
+</div>   
+<div class="col-3">
+         <label>Fecha</label>
+          <input type="text" class="form-control" placeholder="Fecha" aria-label="Zip">
+
+    </div>
+    <div class="col-3">
+         <label>Hora</label>
+          <input type="text" class="form-control" placeholder="Hora" aria-label="Zip">
+
+    </div>
+   
+   
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+</div>
+</div>*@
+
+
+@*inject HttpClient Http
+@using System.Net.Http.Json
+
+<h3>Reserva de Boletos</h3>
+
+@if (eventos == null)
+{
+    <p>Cargando eventos...</p>
+}
+else if (eventos.Count == 0)
+{
+    <p>No hay eventos disponibles.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Cantidad Disponible</th>
+                <th>Cantidad a Reservar</th>
+                <th>Asiento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evento in eventos)
+            {
+                <tr>
+                    <td>@evento.eventoId</td>
+                    <td>@evento.nombreEvento</td>
+                    <td>@evento.cantidadBoletos</td>
+                    <td>@evento</td>
+                    <td>
+                        <input type="number" min="0" max="@evento.cantidadBoletos" value="@evento.cantidadBoletos)"
+                         @*oninput="@(e => evento.cantidadBoletos = ))" />
+                    </td>
+                    <td>
+                       @* <input type="text" value="@evento.reservado" @onchange="@(e => evento.reservado = e.Value.ToString())" />
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="@(e => ReservarBoletos(evento))">Reservar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (reservaExitosa)
+    {
+        <p>¡Reserva realizada con éxito!</p>
+    }
+    else if (reservaFallida)
+    {
+        <p>No se pudo realizar la reserva. Por favor, verifica los datos e intenta nuevamente.</p>
+    }
+}
+
+@code {
+    List<EventoDto> eventos;
+      BoletoDto boleto
+      public String eventoId { get; set; }
+    bool reservaExitosa;
+    bool reservaFallida;
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventos = await Http.GetFromJsonAsync<List<EventoDto>>("api/eventos");
+        foreach (var evento in eventos)
+        {
+            evento.cantidadBoletos = 0;
+           // evento.reservado = "";
+        }
+    }
+  private async Task CargarEvento()
+  {
+    eventos = await Http.GetFromJsonAsync<BoletoDto>($"/eventos/find/{eventoId}");
+  }
+
+    private async Task ReservarBoletos()
+    {
+        // Validar la cantidad de boletos seleccionados y el asiento
+        if (evento.cantidadBoletos >= cantidadBoletos)
+        {
+          eventos.cantidadBoletos -= cantidadBoletos;
+          await HttpClient.putAsJsonAsync($"/api/eventos/{eventoId}", eventos);
+          NavigationManager.NavigationTo("/eventos");
+
+            reservaExitosa = false;
+            reservaFallida = true;
+            return;
+        }
+
+        // Realizar la reserva de boletos en la API
+        var response = await httpClient.PostAsJsonAsync("asiento", evento);
+        if (response.IsSuccessStatusCode)
+        {
+            reservaExitosa = true;
+            reservaFallida = false;
+        }
+        else
+        {
+            reservaExitosa = false;
+            reservaFallida = true;
+        }
+    }
+}
+*@
+
