@@ -1,15 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+using System;
 public class BoletoDto
 {
-    public long BoletoId { get; set; }
-    public long EventoId { get; set; }
-    public double Precio { get; set; }
-    public DateTime Fecha { get; set; } = DateTime.Now;
-}
-
-public class BoletoDetalleDto
-{
-    public long BoletoId { get; set; }
-    public long EventoId { get; set; }
-    public double Precio { get; set; }
-    public DateTime Fecha { get; set; } = DateTime.Now;
+    public long boletoId { get; set; }
+    public string? asiento { get; set; }
+    public double cantidadBoletos { get; set; }
+    public double precio { get; set; }
+     public EventoDto? eventos { get; set; }
 }

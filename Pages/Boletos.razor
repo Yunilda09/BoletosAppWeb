@@ -1,60 +1,121 @@
-@page "/Boleto"
-@inject HttpClient Http
+@page "/boletos/{eventoId}"
 
+@inject HttpClient httpClient
+@inject NavigationManager NavigationManager
 
-<h2>Boletos</h2>
-
-@if (boletos == null)
-{
-<p>Cargando eventos...</p>
-}
-else if (boletos.Count == 0)
-{
-<p>No hay eventos disponibles.</p>
+@if (evento == null)
+{   
+    <p>Cargando boletos...</p>
 }
 else
 {
-<table class="table">
+    <div class="card">
+        <div class="card-body">
+            <div class="boleto-container"> 
+                <div class="row">
+                    <div class="col-md-8">
+                             <div class="ticket-header">
+                                <h2 class="ticket-title">Boleto</h2>
+                                <link rel="~/StyleHeet" href="Style/css">
+                                <div class="boleto-container">
+                           
+                                    <p>Nombre de Evento: @evento.nombreEvento</p>
+                                    <p>Tipo de evento: @evento.descripcion</p>
+                                    <p>Fecha: @evento.fecha</p>
+                                    <p>Ubicacion: @evento.ubicacion</p>
+                                    <p>Seccion: @boleto.asiento</p>
+                                   <p>Precio: @boleto.precio.00</p>
+                           
+                                </div>
+                            </div>
+                        </div>
+                
+                    <div class="col-md-8">
+                        <div class="form-group">
+                             <label>Ingrese cantidad de boletos que desea reservar</label>
+                             <InputNumber @bind-Value="ReducirBoletos" />
+                            <label>Cantidad de boletos disponibles</label>
+                            <InputNumber disable @bind-Value="boleto.cantidadBoletos" />                            
+                            
+                        </div> 
+                    </div>
 
-    <thead>
-            <tr>
-                <th>BoletoId</th>
-                <th> EventoId</th>
-                <th>Precio</th>
-                <th>Fecha</th>
-            </tr>
-    </thead>
-  <tbody>
-
-@foreach (var boleto in boletos)
-{
-    <tr>
-        <td>@boleto.BoletoId</td>
-        <td>@boleto.EventoId</td>
-        <td>@boleto.Precio</td>
-        <td>@boleto.Fecha</td>
-        <td>
-           
-            {
-                <button @onclick = "GetBoleto">Seleccionar Boletos</button>
-            }
-         
-        </td>
-       
-    </tr>
+                        <button type="button" class="btn btn-primary mt-3" @onclick="ReservarBoleto">Reservar</button>
+                            @if (reservaExitosa)
+                              {
+                                <p>¡Reservación exitosa! @ReducirBoletos boletos</p>
+                              }
+                             @if (!string.IsNullOrEmpty(mensajeError))
+                              {
+                                 <p>Error: @mensajeError</p>
+                              }     
+                     </div>
+                </div>
+             </div>
+    </div>
 }
-  </tbody>
-</table>
 
-}
-  
+@code {
+    BoletoDto boleto;
+    EventoDto evento;
+    public double ReducirBoletos {get; set;}
+     public double Resultado { get; set; }
+     public String mensajeError;
+     private bool reservaExitosa = false;
+     public int precio { get; set; }
 
-@code{
-    private List<BoletoDto> boletos;
+    [Parameter]
+    public string eventoId { get; set; }
 
-     private async Task GetBoleto(){
-        var boleto = await Http.GetFromJsonAsync<List<BoletoDto>>("/list/boletos");
-            Console.WriteLine("way" +boleto);
+    protected override async Task OnInitializedAsync()
+    {
+        await GetEvento();
+        await GetBoleto();
     }
+
+    private async Task GetEvento()
+    {
+        evento = await httpClient.GetFromJsonAsync<EventoDto>($"/eventos/evento/{eventoId}");
+    }
+
+    private async Task GetBoleto()
+    {
+        boleto = await httpClient.GetFromJsonAsync<BoletoDto>($"/boletos/boleto/{eventoId}");
+    }
+
+    private async Task ReservarBoleto()
+{
+
+    try
+    {
+         if(ReducirBoletos > boleto.cantidadBoletos ){
+
+                mensajeError = "La cantidad de boletos solicitada sobrepasa la cantidad disponible";
+
+                return;
+
+            }
+
+            Resultado =  boleto.cantidadBoletos - ReducirBoletos;
+
+            boleto.cantidadBoletos = Resultado;
+
+
+            reservaExitosa = true;
+            mensajeError = null;
+
+             httpClient.PutAsJsonAsync<BoletoDto>($"boletos/update/{boleto.boletoId}", boleto);
+    }
+    catch (Exception ex)
+    {
+       
+            reservaExitosa = false;
+            mensajeError = ex.Message;
+    }
+
     
 }
+ 
+}
+
+

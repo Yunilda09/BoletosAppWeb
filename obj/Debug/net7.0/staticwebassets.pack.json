@@ -57,6 +57,10 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "C:\\Computacion Centrada en Redes\\BoletosAppWeb\\wwwroot\\img\\Ticket-logo.png",
+      "PackagePath": "staticwebassets\\img\\Ticket-logo.png"
+    },
+    {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.BoletosAppWeb.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

@@ -1,21 +1,28 @@
 using System.ComponentModel.DataAnnotations;
 
+/*
 public class Boletos{
     [Key]
     [Range(0, long.MaxValue, ErrorMessage = "El Id debe de estar en el rango{1} y {2}.")]
-    public long BoletoId { get; set; }
-    public long EventoId { get; set; }
-    public double Precio { get; set; }
-    public string? Area { get; set; }
-    public DateTime Fecha { get; set; } = DateTime.Now;
+    public long boletoId { get; set; }
+    public string? asiento { get; set; }
+    public long cantidadBoletos { get; set; }
+    public double precio { get; set; }
+     public List<Evento> eventos { get; set; }
+}*/
 
-   // public List<BoletoDetalle> detalle { get; set; } = new List<BoletoDetalle>();
+public class Boletos
+{
+    [Key]
+    [Range(0, long.MaxValue, ErrorMessage = "El Id debe de estar en el rango {1} y {2}.")]
+   // [JsonProperty("boletoId")] // Establecer el nombre correcto de la propiedad en la deserialización
+    public long boletoId { get; set; }
 
-    public Boletos()
-    {
-        BoletoId=0;
-        EventoId = 0;
-        Precio= 0;
-        Fecha = DateTime.Now;
-    }
+    public string? asiento { get; set; }
+
+   // [JsonProperty("cantidadBoletos")] // Establecer el nombre correcto de la propiedad en la deserialización
+    public long cantidadBoletos { get; set; }
+
+    public double precio { get; set; }
+
 }

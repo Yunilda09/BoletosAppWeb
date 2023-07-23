@@ -1,0 +1,29 @@
+body {
+    width: 300px;
+    background-color: rgb(156, 199, 232);
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ticket-header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .ticket-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .ticket-footer {
+    margin-top: 20px;
+  }
+  
+  .ticket-date {
+    font-size: 12px;
+    text-align: right;
+  }
+
+  

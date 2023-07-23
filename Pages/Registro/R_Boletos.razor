@@ -3,15 +3,15 @@
 
 <div class="card border-info mb-3" style="max-width: 100rem;">
  <div class="card text-dark bg-light mb-3 shadow-lg">
-  
+
     <h2 class="card-hearder"> Eventos</h2>
 
 <div class="card-body">
 
     <div class="row justify-content-between">
-    
+
     <div class="row justify-content-between">
-       
+
   <div class="col-sm">
     <label>Nombre del Evento</label>
     <input type="text" class="form-control" placeholder="Nombre Evento" aria-label="Nombre Evento">
@@ -35,8 +35,8 @@
           <input type="text" class="form-control" placeholder="Hora" aria-label="Zip">
 
     </div>
-   
-   
+
+
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
@@ -154,3 +154,223 @@ else
 }
 *@
 
+@*page "/boletos/{eventoId}"
+
+@inject HttpClient httpClient
+@using System.Net.Http.Json
+@inject NavigationManager NavigationManager
+
+
+             
+
+
+@if (evento == null)
+{   
+        <p>Cargando boletos...</p>
+}
+else
+{
+    
+   
+
+    <div class="card">
+        <div class="card-body">
+         <div class="boleto-container"> 
+
+             <div class="row">
+        <div class="col-md-8">
+            <div class="ticket">
+                <div class="ticket-header">
+                    <h2 class="ticket-title">Boleto</h2>
+
+            <p> @evento.nombreEvento</p>
+            <p> @evento.descripcion</p>
+            <p> @evento.fecha.ToString("dd/MM/yyyy")</p>
+            <p> @evento.ubicacion</p>
+            <p> @boleto.asiento</p>
+            <p>@boleto.precio</p>
+            
+         </div>
+            </div>
+    </div>
+          
+            </div>
+        </div>
+    </div>
+</div> 
+
+  }  
+  
+      
+           
+
+@code {
+  
+    EventoDto evento;
+    BoletoDto boleto;
+
+    [Parameter]
+    public string eventoId {get; set;}
+
+     protected override async Task OnInitializedAsync()
+    {
+        await GetEvento();
+        await GetBoleto();
+    }
+
+   private async Task GetEvento()
+    {
+           evento = await httpClient.GetFromJsonAsync<EventoDto>($"/eventos/evento/{eventoId}");
+    }
+     private async Task GetBoleto()
+    {
+          boleto = await httpClient.GetFromJsonAsync<BoletoDto>($"/boletos/boleto/{eventoId}");
+    }
+   
+}
+*@
+@*page "/Boleto"
+@inject HttpClient Http
+
+
+<h2>Boletos</h2>
+
+@if (boletos == null)
+{
+<p>Cargando eventos...</p>
+}
+else if (boletos.Count == 0)
+{
+<p>No hay eventos disponibles.</p>
+}
+else
+{
+<table class="table">
+
+    <thead>
+            <tr>
+                <th>BoletoId</th>
+                <th> EventoId</th>
+                <th>Precio</th>
+                <th>Fecha</th>
+            </tr>
+    </thead>
+  <tbody>
+
+@foreach (var boleto in boletos)
+{
+    <tr>
+       
+        <td>
+           
+            {
+                <button @onclick = "GetBoleto">Seleccionar Boletos</button>
+            }
+         
+        </td>
+       
+    </tr>
+}
+  </tbody>
+</table>
+
+}
+  
+
+@code{
+    private List<BoletoDto> boletos;
+
+     private async Task GetBoleto(){
+        var boleto = await Http.GetFromJsonAsync<List<BoletoDto>>("/list/boletos");
+            Console.WriteLine("way" +boleto);
+    }
+    
+}*@
+
+@*page "/boleto"
+
+@inject HttpClient httpClient
+@using System.Net.Http.Json
+@inject NavigationManager NavigationManager
+
+<h3>Detalle del Boleto</h3>
+
+@if (boleto == null)
+{
+    <p>Cargando boleto...</p>
+}
+else
+{
+    <div>
+        <p><strong>Evento:</strong> @boleto.boleto</p>
+        @*<p><strong>Sección:</strong> @boleto.Seccion</p>
+        <p><strong>Asiento:</strong> @boleto.Asiento</p>
+    </div>
+}
+
+@code {
+    private Boletos boleto;
+    [Parameter] public string id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        boleto = await BoletoService.GetBoletoById(id);
+        //httpClient.GetFromJsonAsync<List<Boletos>>("/lista/boletos");
+        /
+
+    }
+}
+
+@page "/boleto"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+@if (evento == null)
+{
+    <p>Cargando evento...</p>
+}
+else
+{
+    <div class="boleto-container">
+    <h4>Evento: @evento.nombreEvento</h4>
+    <p>Tipo: @evento.descripcion</p>
+    <p>Fecha: @evento.fecha</p>
+    <p>Ubicación: @evento.ubicacion</p>
+    <p>Disponibilidad: @evento.secciones</p>
+    
+
+    <label>Cantidad de Boletos:</label>
+    <input type="number" min="1" max="@evento.descripcion" value="@cantidadBoletos" @oninput="e => cantidadBoletos = Convert.ToInt32(e.Value)">
+
+    <button class="btn btn-primary" disabled="@evento.descripcion <= 0 || cantidadBoletos <= 0 || cantidadBoletos > evento.disponibilidad" @onclick="ReservarBoletos">Reservar</button>
+    <p class="error-message">@mensajeError</p>
+    </div>
+}
+
+@code {
+    EventoDto evento;
+    BoletoDto boleto;
+    private string mensajeError;
+    public int cantidadBoletos = 1;
+
+    [Parameter]
+    public string eventoId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //await CargarEvento();
+    }
+
+    private async Task CargarEvento()
+    {
+        evento = await Http.GetFromJsonAsync<EventoDto>("/boletos/{eventossId}");
+    }
+ 
+
+    private async Task ReservarBoletos()
+    {
+        
+        NavigationManager.NavigateTo("/confirmacion");
+    }
+
+}*@

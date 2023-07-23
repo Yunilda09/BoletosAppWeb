@@ -9,13 +9,13 @@ h1:focus {
 }
 
 a, .btn-link {
-    color: #0071c1;
+    color: #469af3;
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    color: #fff3;
+    background-color: #1d6dc3;
+    border-color: #f9c6ffeb;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {

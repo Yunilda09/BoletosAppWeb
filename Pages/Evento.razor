@@ -6,7 +6,7 @@
 
  
 
-<h3>Lista de Eventos</h3>
+<h3> Lista de Eventos</h3>
 
  
 
@@ -20,34 +20,35 @@ else if (eventos.Count == 0)
 }
 else
 {
-<table class="table">
-<thead class="table">
-<tr>
-<th>Id</th>
-<th>Nombre</th>
-<th>Cantidad de boletos</th>
-<th>Tipo Evento</th>
-</tr>
-</thead>
-<tbody>
-            @foreach (var evento in eventos)
-            {
-<tr>
-<td>@evento.eventoId</td>
-<td>@evento.nombreEvento</td>
-<td>@evento.cantidadBoletos</td>
-<td>@evento.tipoEvento</td>
-</tr>@*
-     <div class="d-flex justify-content-start">
-        <div>
-    <button type="button" class="btn btn-outline-info" @onclick="() => VerBoletosReservados(evento.eventoId)">Ver</button>
-    </div>
-    <div>
-     <button type="button" class="btn btn-outline-info" @onclick="() => AgregarBoletos(evento.eventoId)">Agregar</button>
-     </div>
-     </div> *@              
+    <table class="table">
+        <thead >
+            <tr>
+
+                <th>Nombre Evento</th>
+                <th>Tipo Evento</th> 
+                <th>Fecha</th>              
+                <th>Ubicacion</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+                 @foreach (var evento in eventos)
+                 {
+                    <tr>
+
+                        <td>@evento.nombreEvento</td>
+                        <td>@evento.descripcion</td>
+                        <td>@evento.ubicacion</td>
+                        <td>@evento.fecha</td>
+                        
+                        <td>
+                        
+                            <button type="button" class="btn btn-outline-info" @onclick="() => VerBoletosReservados(evento.eventoId)">Ver</button>
+                            
+                         </td>
+                    </tr>
     }      
-        </tbody>
+        </tbody>    
     </table>
 
 }
@@ -58,20 +59,15 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        eventos = await httpClient.GetFromJsonAsync<List<EventoDto>>("/list/evento");
+        eventos = await httpClient.GetFromJsonAsync<List<EventoDto>>("/eventos/list/evento");
     }
 
-    private void VerBoletosReservados(int eventoId)
+    private void VerBoletosReservados(long eventoId)
     {
         // Navegar a la página de visualización de boletos reservados para el evento con el ID proporcionado
-        NavigationManager.NavigateTo($"/eventos/{eventoId}/boletosreservados");
+        NavigationManager.NavigateTo($"/boletos/{eventoId}");
     }
 
-    private void AgregarBoletos(int eventoId)
-    {
-        // Navegar a la página de agregar boletos para el evento con el ID proporcionado
-        NavigationManager.NavigateTo($"/eventos/{eventoId}/agregarboletos");
-    }
    
 
    
