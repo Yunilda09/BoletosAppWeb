@@ -9,41 +9,43 @@
 }
 else
 {
-    <div class="card">
-        <div class="card-body">
-            <div class="boleto-container"> 
-                <div class="row">
-                    <div class="col-md-8">
-                             <div class="ticket-header">
-                                <h2 class="ticket-title">Boleto</h2>
-                                <link rel="~/StyleHeet" href="Style/css">
-                                <div class="boleto-container">
-                           
-                                    <p>Nombre de Evento: @evento.nombreEvento</p>
-                                    <p>Tipo de evento: @evento.descripcion</p>
-                                    <p>Fecha: @evento.fecha</p>
-                                    <p>Ubicacion: @evento.ubicacion</p>
-                                    <p>Seccion: @boleto.asiento</p>
-                                   <p>Precio: @boleto.precio.00</p>
-                           
+    <div class="card shadow">
+         <div class="card border mb-4" style="max-width: 80rem;">
+            <div class="card text-dark bg-light mb-3">
+                <h2 style="margin: 18px; text-shadow:0.5px 1px rgba(0,0,0.5); text-align:center;">Boleto</h2>
+                     <div class="card-body">
+                         <div class="row">
+                             <div class="col-md-6">
+                                <div class="boleto-container" >
+                                    <table class="table table">
+                                        <thead>
+                                            <tr>
+                                                <p>Nombre de Evento: @evento.nombreEvento</p>
+                                                <p>Tipo de evento: @evento.descripcion</p>
+                                                <p>Fecha: @evento.fecha</p>
+                                                <p>Ubicacion: @evento.ubicacion</p>
+                                                <p>Seccion: @boleto.asiento</p>
+                                                <p>Precio: @boleto.precio.00</p>
+                                            </tr>
+                                        </thead>
+                                   </table>
                                 </div>
                             </div>
                         </div>
-                
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="form-group">
-                             <label>Ingrese cantidad de boletos que desea reservar</label>
-                             <InputNumber @bind-Value="ReducirBoletos" />
-                            <label>Cantidad de boletos disponibles</label>
-                            <InputNumber disable @bind-Value="boleto.cantidadBoletos" />                            
+                             <label>Ingrese la cantidad de boletos a reservar</label>
+                             <InputNumber @bind-Value="ReducirBoletos"/>
+                            <label>Boletos disponibles</label>
+                            <InputNumber disable @bind-Value="boleto.cantidadBoletos"/>                            
                             
                         </div> 
                     </div>
-
-                        <button type="button" class="btn btn-primary mt-3" @onclick="ReservarBoleto">Reservar</button>
+                 <div class="d-grid gap-6 d-md-flex justify-content-md-center mt-6" >
+                        <button type="button"  class="btn btn-primary mt-6" @onclick="ReservarBoleto"> Reservar </button>
                             @if (reservaExitosa)
                               {
-                                <p>¡Reservación exitosa! @ReducirBoletos boletos</p>
+                                <p>¡Boleto Reservado! @ReducirBoletos boletos</p>
                               }
                              @if (!string.IsNullOrEmpty(mensajeError))
                               {
@@ -51,8 +53,10 @@ else
                               }     
                      </div>
                 </div>
+    </div>
              </div>
     </div>
+    
 }
 
 @code {
@@ -85,7 +89,6 @@ else
 
     private async Task ReservarBoleto()
 {
-
     try
     {
          if(ReducirBoletos > boleto.cantidadBoletos ){
@@ -100,7 +103,6 @@ else
 
             boleto.cantidadBoletos = Resultado;
 
-
             reservaExitosa = true;
             mensajeError = null;
 
@@ -108,7 +110,6 @@ else
     }
     catch (Exception ex)
     {
-       
             reservaExitosa = false;
             mensajeError = ex.Message;
     }

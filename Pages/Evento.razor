@@ -1,14 +1,9 @@
 @page "/evento"
 @inject HttpClient httpClient
+
 @using System.Net.Http.Json
 @inject NavigationManager NavigationManager
 
-
- 
-
-<h3> Lista de Eventos</h3>
-
- 
 
 @if (eventos == null)
 {
@@ -19,44 +14,45 @@ else if (eventos.Count == 0)
 <p>No hay eventos disponibles.</p>
 }
 else
-{
-    <table class="table">
-        <thead >
-            <tr>
-
-                <th>Nombre Evento</th>
-                <th>Tipo Evento</th> 
-                <th>Fecha</th>              
-                <th>Ubicacion</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-                 @foreach (var evento in eventos)
-                 {
-                    <tr>
-
-                        <td>@evento.nombreEvento</td>
-                        <td>@evento.descripcion</td>
-                        <td>@evento.ubicacion</td>
-                        <td>@evento.fecha</td>
-                        
-                        <td>
-                        
-                            <button type="button" class="btn btn-outline-info" @onclick="() => VerBoletosReservados(evento.eventoId)">Ver</button>
-                            
-                         </td>
-                    </tr>
-    }      
-        </tbody>    
-    </table>
+{ <div class="card shadow">
+     <div class="card border mb-4" style="max-width: 80rem;">
+                <div class="card text-dark bg-light mb-3">
+                <h2 style="margin: 18px; text-shadow:0.5px 1px rgba(0,0,0.5); text-align: center;"> Lista de Eventos</h2>
+                      <div class="card-body">
+                    <table class="table">
+                         <thead >
+                            <tr>
+                                <th>Nombre Evento</th>
+                                <th>Tipo Evento</th> 
+                                <th>Fecha</th>              
+                                <th>Ubicacion</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach (var evento in eventos) {
+                             <tr>
+                                 <td>@evento.nombreEvento</td>
+                                 <td>@evento.descripcion</td>
+                                 <td>@evento.fecha</td>
+                                 <td>@evento.ubicacion</td>
+                                 <td>
+                                     <button type="button" class="btn btn-outline-info" @onclick="() => VerBoletosReservados(evento.eventoId)">Ver</button>
+                                  </td>
+                                </tr>
+                                } 
+                        </tbody> 
+                </table>
+                </div>
+        </div>
+    </div>
+    </div>
+    
 
 }
 
 @code {
     List<EventoDto> eventos;
-    
-
     protected override async Task OnInitializedAsync()
     {
         eventos = await httpClient.GetFromJsonAsync<List<EventoDto>>("/eventos/list/evento");
@@ -67,8 +63,4 @@ else
         // Navegar a la página de visualización de boletos reservados para el evento con el ID proporcionado
         NavigationManager.NavigateTo($"/boletos/{eventoId}");
     }
-
-   
-
-   
 }

@@ -10,14 +10,14 @@ main[b-604m1bcvrt] {
 }
 
 .sidebar[b-604m1bcvrt] {
-    background-image: linear-gradient(180deg, rgb(144, 100, 199) 0%, #8b2d77 70%);
+    background-image: linear-gradient(180deg, rgb(188, 243, 243) 0%, #f8b4f6ea 80%);
 }
 
 .top-row[b-604m1bcvrt] {
-   background-color: #d8a5ed;
-    border-bottom: 1px solid #4e4e97;
+   background-color: #baeef1;
+    border-bottom: 1px solid #baeef1;
     justify-content: flex-end;
-    height: 3.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
 }
@@ -52,7 +52,7 @@ main[b-604m1bcvrt] {
     }
 
     .sidebar[b-604m1bcvrt] {
-        width: 250px;
+        width: 150px;
         height: 100vh;
         position: sticky;
         top: 0;
@@ -76,7 +76,7 @@ main[b-604m1bcvrt] {
 
 .top-row[b-4tavz1hroj] {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(#b8eaec);
 }
 
 .navbar-brand[b-4tavz1hroj] {

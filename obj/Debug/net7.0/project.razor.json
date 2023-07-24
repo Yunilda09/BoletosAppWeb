@@ -13,6 +13,43 @@
   "ProjectWorkspaceState": {
     "TagHelpers": [
       {
+        "HashCode": -1294218015,
+        "Kind": "Components.Component",
+        "Name": "BoletosAppWeb.Pages.Registro.R_Boletos",
+        "AssemblyName": "BoletosAppWeb",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "R_Boletos"
+          }
+        ],
+        "Metadata": {
+          "Common.TypeName": "BoletosAppWeb.Pages.Registro.R_Boletos",
+          "Common.TypeNameIdentifier": "R_Boletos",
+          "Common.TypeNamespace": "BoletosAppWeb.Pages.Registro",
+          "Runtime.Name": "Components.IComponent"
+        }
+      },
+      {
+        "HashCode": 245529847,
+        "Kind": "Components.Component",
+        "Name": "BoletosAppWeb.Pages.Registro.R_Boletos",
+        "AssemblyName": "BoletosAppWeb",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BoletosAppWeb.Pages.Registro.R_Boletos"
+          }
+        ],
+        "Metadata": {
+          "Common.TypeName": "BoletosAppWeb.Pages.Registro.R_Boletos",
+          "Common.TypeNameIdentifier": "R_Boletos",
+          "Common.TypeNamespace": "BoletosAppWeb.Pages.Registro",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch",
+          "Runtime.Name": "Components.IComponent"
+        }
+      },
+      {
         "HashCode": -373139112,
         "Kind": "Components.Component",
         "Name": "BoletosAppWeb.Pages.Index",
@@ -50,38 +87,38 @@
         }
       },
       {
-        "HashCode": -1294218015,
+        "HashCode": -959120494,
         "Kind": "Components.Component",
-        "Name": "BoletosAppWeb.Pages.Registro.R_Boletos",
+        "Name": "BoletosAppWeb.Pages.Evento",
         "AssemblyName": "BoletosAppWeb",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "R_Boletos"
+            "TagName": "Evento"
           }
         ],
         "Metadata": {
-          "Common.TypeName": "BoletosAppWeb.Pages.Registro.R_Boletos",
-          "Common.TypeNameIdentifier": "R_Boletos",
-          "Common.TypeNamespace": "BoletosAppWeb.Pages.Registro",
+          "Common.TypeName": "BoletosAppWeb.Pages.Evento",
+          "Common.TypeNameIdentifier": "Evento",
+          "Common.TypeNamespace": "BoletosAppWeb.Pages",
           "Runtime.Name": "Components.IComponent"
         }
       },
       {
-        "HashCode": 245529847,
+        "HashCode": -1452359924,
         "Kind": "Components.Component",
-        "Name": "BoletosAppWeb.Pages.Registro.R_Boletos",
+        "Name": "BoletosAppWeb.Pages.Evento",
         "AssemblyName": "BoletosAppWeb",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "BoletosAppWeb.Pages.Registro.R_Boletos"
+            "TagName": "BoletosAppWeb.Pages.Evento"
           }
         ],
         "Metadata": {
-          "Common.TypeName": "BoletosAppWeb.Pages.Registro.R_Boletos",
-          "Common.TypeNameIdentifier": "R_Boletos",
-          "Common.TypeNamespace": "BoletosAppWeb.Pages.Registro",
+          "Common.TypeName": "BoletosAppWeb.Pages.Evento",
+          "Common.TypeNameIdentifier": "Evento",
+          "Common.TypeNamespace": "BoletosAppWeb.Pages",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch",
           "Runtime.Name": "Components.IComponent"
         }
@@ -146,43 +183,6 @@
         }
       },
       {
-        "HashCode": -959120494,
-        "Kind": "Components.Component",
-        "Name": "BoletosAppWeb.Pages.Evento",
-        "AssemblyName": "BoletosAppWeb",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Evento"
-          }
-        ],
-        "Metadata": {
-          "Common.TypeName": "BoletosAppWeb.Pages.Evento",
-          "Common.TypeNameIdentifier": "Evento",
-          "Common.TypeNamespace": "BoletosAppWeb.Pages",
-          "Runtime.Name": "Components.IComponent"
-        }
-      },
-      {
-        "HashCode": -1452359924,
-        "Kind": "Components.Component",
-        "Name": "BoletosAppWeb.Pages.Evento",
-        "AssemblyName": "BoletosAppWeb",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BoletosAppWeb.Pages.Evento"
-          }
-        ],
-        "Metadata": {
-          "Common.TypeName": "BoletosAppWeb.Pages.Evento",
-          "Common.TypeNameIdentifier": "Evento",
-          "Common.TypeNamespace": "BoletosAppWeb.Pages",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch",
-          "Runtime.Name": "Components.IComponent"
-        }
-      },
-      {
         "HashCode": -92388184,
         "Kind": "Components.Component",
         "Name": "BoletosAppWeb.App",
@@ -215,65 +215,6 @@
           "Common.TypeName": "BoletosAppWeb.App",
           "Common.TypeNameIdentifier": "App",
           "Common.TypeNamespace": "BoletosAppWeb",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch",
-          "Runtime.Name": "Components.IComponent"
-        }
-      },
-      {
-        "HashCode": 393280968,
-        "Kind": "Components.Component",
-        "Name": "BoletosAppWeb.Shared.SurveyPrompt",
-        "AssemblyName": "BoletosAppWeb",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title",
-              "Common.GloballyQualifiedTypeName": "global::System.String"
-            }
-          }
-        ],
-        "Metadata": {
-          "Common.TypeName": "BoletosAppWeb.Shared.SurveyPrompt",
-          "Common.TypeNameIdentifier": "SurveyPrompt",
-          "Common.TypeNamespace": "BoletosAppWeb.Shared",
-          "Runtime.Name": "Components.IComponent"
-        }
-      },
-      {
-        "HashCode": 825246742,
-        "Kind": "Components.Component",
-        "Name": "BoletosAppWeb.Shared.SurveyPrompt",
-        "AssemblyName": "BoletosAppWeb",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BoletosAppWeb.Shared.SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title",
-              "Common.GloballyQualifiedTypeName": "global::System.String"
-            }
-          }
-        ],
-        "Metadata": {
-          "Common.TypeName": "BoletosAppWeb.Shared.SurveyPrompt",
-          "Common.TypeNameIdentifier": "SurveyPrompt",
-          "Common.TypeNamespace": "BoletosAppWeb.Shared",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch",
           "Runtime.Name": "Components.IComponent"
         }
@@ -382,6 +323,65 @@
           "Components.IsSpecialKind": "Components.ChildContent",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch",
           "Runtime.Name": "Components.None"
+        }
+      },
+      {
+        "HashCode": 393280968,
+        "Kind": "Components.Component",
+        "Name": "BoletosAppWeb.Shared.SurveyPrompt",
+        "AssemblyName": "BoletosAppWeb",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title",
+              "Common.GloballyQualifiedTypeName": "global::System.String"
+            }
+          }
+        ],
+        "Metadata": {
+          "Common.TypeName": "BoletosAppWeb.Shared.SurveyPrompt",
+          "Common.TypeNameIdentifier": "SurveyPrompt",
+          "Common.TypeNamespace": "BoletosAppWeb.Shared",
+          "Runtime.Name": "Components.IComponent"
+        }
+      },
+      {
+        "HashCode": 825246742,
+        "Kind": "Components.Component",
+        "Name": "BoletosAppWeb.Shared.SurveyPrompt",
+        "AssemblyName": "BoletosAppWeb",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BoletosAppWeb.Shared.SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title",
+              "Common.GloballyQualifiedTypeName": "global::System.String"
+            }
+          }
+        ],
+        "Metadata": {
+          "Common.TypeName": "BoletosAppWeb.Shared.SurveyPrompt",
+          "Common.TypeNameIdentifier": "SurveyPrompt",
+          "Common.TypeNamespace": "BoletosAppWeb.Shared",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch",
+          "Runtime.Name": "Components.IComponent"
         }
       },
       {
